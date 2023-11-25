@@ -43,7 +43,7 @@ except URLError as e:
 # write your own comment - what does this do? Show the normalized data in the dataframe/table
 
 # don't run anything pst here while we troubleshoot
-streamlit.stop()
+#streamlit.stop()
 
 streamlit.header("The fruit load list contains:")
 #Snowflake-related functions
