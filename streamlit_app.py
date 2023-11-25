@@ -1,6 +1,8 @@
 import streamlit
 import pandas
+import requests
 import snowflake.connector
+from urllib.error import URLError
 streamlit.title('My Mom&apos;s New Healthy diner')
 streamlit.header('Breakfast menu')
 streamlit.text('🥣 Omega 3 & Blueberry oatmeal')
@@ -18,7 +20,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 streamlit.dataframe(fruits_to_show)
 
-import requests
+
 
 fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
@@ -28,6 +30,8 @@ streamlit.write('The user entered ', fruit_choice)
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do? Show the normalized data in the dataframe/table
 streamlit.dataframe(fruityvice_normalized)
+# don't run anything pst here while we troubleshoot
+streamlit.stop()
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
